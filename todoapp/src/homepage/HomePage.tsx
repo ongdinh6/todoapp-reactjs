@@ -13,7 +13,7 @@ const HomePage = () => {
                 <Link to={"/signin"}> SIGN IN </Link>
             </li>
             <li>
-                <Link to={"/todo/create"}> CREATE A TODO ITEM</Link>
+                <Link to={"/todo/create"}> CREATE A TODO ITEM </Link> (only for logged in users)
             </li>
         </ul>
     );

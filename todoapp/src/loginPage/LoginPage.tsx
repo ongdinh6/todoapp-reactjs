@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const LoginPage = () => {
 
     return <div>
@@ -10,6 +12,7 @@ const LoginPage = () => {
             <input title="Type password here!" type="password" />
         </div>
         <button>Submit</button>
+        <Link to="/">Go to Home page</Link>
     </div>
 }
 

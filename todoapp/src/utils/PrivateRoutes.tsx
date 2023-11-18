@@ -1,6 +1,12 @@
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoutes = () => {
+type PrivateRouterProps = {
+    user: any
+}
+
+const PrivateRoutes = ({ user }: PrivateRouterProps) => {
     return <>
+        {user.isAuthenticated ? <Outlet /> : <Navigate to="/signin" />}
     </>;
 }
 
