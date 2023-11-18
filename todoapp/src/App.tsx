@@ -6,18 +6,17 @@ import TodoListPage from './todoListPage/TodoListPage';
 import LoginPage from './loginPage/LoginPage';
 import TodoCreateForm from './todoManagementPage/TodoCreateForm';
 import PrivateRoutes from './utils/PrivateRoutes';
+import { useAppSelector } from './state/app.hooks';
 
 function App() {
   const history = useNavigate();
-  const user = {
-    isAuthenticated: false,
-    token: "accesstokenisenabled"
-  }
+  // Use store
+  const auth = useAppSelector((state) => state.auth.payload);
   return (
     <>
       <button onClick={() => history(-1)}>Go back</button>
       <Routes>
-        <Route element={<PrivateRoutes user={user} />}>
+        <Route element={<PrivateRoutes user={auth} />}>
           <Route path="/todo/create" element={<TodoCreateForm />}></Route>
         </Route>
 

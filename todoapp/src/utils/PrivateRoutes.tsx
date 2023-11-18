@@ -6,7 +6,7 @@ type PrivateRouterProps = {
 
 const PrivateRoutes = ({ user }: PrivateRouterProps) => {
     return <>
-        {user.isAuthenticated ? <Outlet /> : <Navigate to="/signin" />}
+        {(user !== null && user.isAuthenticated) ? <Outlet /> : <Navigate to="/signin" />}
     </>;
 }
 

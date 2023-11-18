@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import loginService from "./service/loginService";
 import { useState } from "react";
+import { useAppDispatch } from "../state/app.hooks";
+import { loginFail, loginLoading, loginSuccess } from "./state/login.reducer";
 
 const LoginService = loginService;
 const enum FormFields {
@@ -15,15 +17,22 @@ const LoginPage = () => {
     const [pwd, setPwd] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
+    // Use store
+    const dispatch = useAppDispatch();
+
     const handleSubmit = (username: string, pwd: string) => {
+        dispatch(loginLoading());
+
         LoginService.login(username, pwd)
             .then((response: any) => {
                 console.log("Login Success with the user details: ", response);
+                dispatch(loginSuccess(response));
                 // Todo: navigate to the previous page
-                navigate("/");
+                navigate(-1);
             })
             .catch((error: any) => {
                 console.error("Login Failed with details: ", error)
+                dispatch(loginFail(error));
                 setErrorMessage(error.errorMessage);
             });
     }
