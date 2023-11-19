@@ -38,7 +38,6 @@ const TodoCreateForm = () => {
             .then((response: any) => {
                 console.log("Create a todo successful with details: ", response);
                 dispatch(todoCreateSuccess(response));
-                return response;
             })
             .catch((error: any) => {
                 console.error("Create a todo failed with details: ", error);

@@ -1,6 +1,6 @@
 import { TodoModel } from "../todo.model";
 
-const initialTodoList: TodoModel[] = [
+let initialTodoList: TodoModel[] = [
     { id: 1, title: "Listen to music", createdBy: "Owner 1" },
     { id: 2, title: "Do exercise", createdBy: "Owner 2" },
     { id: 3, title: "Go hangout", createdBy: "Owner 3" },
@@ -17,9 +17,13 @@ class TodoService {
     
 
     add(todoModel: TodoModel): Promise<any> {
+        console.log("Create a Todo Item: ", todoModel);
         if (todoModel.title !== null || todoModel.title !== EMPTY) {
-            initialTodoList.push(todoModel);
-            return Promise.resolve(initialTodoList);
+            const todoList = [
+                ...initialTodoList,
+                todoModel
+            ];
+            return Promise.resolve(todoList);
         }
         return Promise.reject({errorMessage: "Title field must not be empty!"});
     }
