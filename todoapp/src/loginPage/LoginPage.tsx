@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import loginService from "./service/loginService";
+import loginService from "./service/login.service";
 import { useState } from "react";
 import { useAppDispatch } from "../state/app.hooks";
 import { loginFail, loginLoading, loginSuccess } from "./state/login.reducer";
+import { selectPayload } from "./state/login.selector";
+import { store } from "../state/app.store";
 
 const LoginService = loginService;
 const enum FormFields {
@@ -19,6 +21,7 @@ const LoginPage = () => {
 
     // Use store
     const dispatch = useAppDispatch();
+    const authSelector = selectPayload(store.getState());
 
     const handleSubmit = (username: string, pwd: string) => {
         dispatch(loginLoading());
@@ -53,16 +56,27 @@ const LoginPage = () => {
 
 
     return <div>
-        <small style={{ color: "red" }}>{errorMessage}</small>
-        <div>
-            <label>Username:</label>
-            <input title="Type username here!" type="text" onChange={(e) => onFieldChange(e, FormFields.UNAME)} />
-        </div>
-        <div>
-            <label>Password:</label>
-            <input title="Type password here!" type="password" onChange={(e) => onFieldChange(e, FormFields.PWD)} />
-        </div>
-        <button onClick={() => handleSubmit(uname, pwd)}>Submit</button>
+        {
+            authSelector !== null && authSelector.isAuthenticated ?
+                <>
+                    <h3>Welcome, {authSelector.username} to Todo App!</h3>
+                    <Link to={"/logout"}> LOGOUT </Link>
+                    <br />
+                </>
+                :
+                <>
+                    <small style={{ color: "red" }}>{errorMessage}</small>
+                    <div>
+                        <label>Username:</label>
+                        <input title="Type username here!" type="text" onChange={(e) => onFieldChange(e, FormFields.UNAME)} />
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input title="Type password here!" type="password" onChange={(e) => onFieldChange(e, FormFields.PWD)} />
+                    </div>
+                    <button onClick={() => handleSubmit(uname, pwd)}>Submit</button>
+                </>
+        }
         <Link to="/">Go to Home page</Link>
     </div >
 }

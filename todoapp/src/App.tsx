@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import HomePage from './homepage/HomePage';
-import TodoListPage from './todoListPage/TodoListPage';
+import TodoListPage from './todoManagementPage/todoListPage/TodoListPage';
 import LoginPage from './loginPage/LoginPage';
-import TodoCreateForm from './todoManagementPage/TodoCreateForm';
 import PrivateRoutes from './utils/PrivateRoutes';
 import { useAppSelector } from './state/app.hooks';
+import TodoCreateForm from './todoManagementPage/todoCreateForm/TodoCreateForm';
 
 function App() {
   const history = useNavigate();

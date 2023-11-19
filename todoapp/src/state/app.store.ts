@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import storageSession from "reduxjs-toolkit-persist/lib/storage/session";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
+import todomanagementReducer from "../todoManagementPage/state/todomanagement.reducer";
 
 const rootPersistConfig = {
     key: "root",
@@ -17,6 +18,7 @@ const userPersistConfig = {
 
 const rootReducer = combineReducers({
     auth: persistReducer(userPersistConfig, loginReducer),
+    todoManage: todomanagementReducer
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

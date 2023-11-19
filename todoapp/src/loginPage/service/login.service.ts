@@ -5,7 +5,8 @@ class LoginService {
             return Promise.resolve({
                 status: 200,
                 isAuthenticated: true,
-                token: "accesstokenisenabled"
+                token: "accesstokenisenabled",
+                username: "Authenticated User"
             });
         }
 
