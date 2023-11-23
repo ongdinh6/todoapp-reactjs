@@ -34,7 +34,8 @@ export const todoManagementSlice = createSlice({
         todoCreateSuccess: (state, action: PayloadAction<any>) => ({
             ...state,
             loading: false,
-            data: action.payload
+            data: action.payload,
+            error: null
         }),
         todoCreateFail: (state, action: PayloadAction<any>) => ({
             ...state,

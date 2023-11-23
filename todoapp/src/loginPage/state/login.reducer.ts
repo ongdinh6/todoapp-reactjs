@@ -18,7 +18,8 @@ export const loginSlice = createSlice({
         loginSuccess: (state, action: PayloadAction<any>) => ({
             ...state, 
             loading: false,
-            payload: action.payload
+            payload: action.payload,
+            error: null
         }),
         loginFail: (state, action: PayloadAction<any>) => ({
             ...state,

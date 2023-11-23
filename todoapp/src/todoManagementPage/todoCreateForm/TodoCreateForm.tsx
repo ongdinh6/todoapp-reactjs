@@ -14,6 +14,8 @@ const TodoCreateForm = () => {
         createdBy: null,
     });
 
+    const [added, setAdded] = useState<string | null>(null)
+
     // Use store
     const dispatch = useAppDispatch();
     const authSelector = useAppSelector((state) => state.auth.payload);
@@ -38,6 +40,7 @@ const TodoCreateForm = () => {
             .then((response: any) => {
                 console.log("Create a todo successful with details: ", response);
                 dispatch(todoCreateSuccess(response));
+                handleAddSuccess(response.data.title);
             })
             .catch((error: any) => {
                 console.error("Create a todo failed with details: ", error);
@@ -54,7 +57,13 @@ const TodoCreateForm = () => {
         }));
     };
 
+
+    const handleAddSuccess = (title: string) => {
+        setAdded(`The new todo item with '${title}' name is successful!`)
+    }
+
     return <div>
+        <small color="blue">{added}</small>
         <div>
             <label>Title:</label>
             <input title="Type todo's title here!" type="text" onChange={(e) => handleUpdateTodoModel(e)} />
